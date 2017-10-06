@@ -34,11 +34,16 @@ int	taskid,	        /* task ID - also used as seed number */
 	rc,             /* return code */
 	i;
 MPI_Status status;
+double start, end;
 
 /* Obtain number of tasks and task ID */
 MPI_Init(&argc,&argv);
 MPI_Comm_size(MPI_COMM_WORLD,&numtasks);
 MPI_Comm_rank(MPI_COMM_WORLD,&taskid);
+
+MPI_Barrier(MPI_COMM_WORLD); /* IMPORTANT */
+start = MPI_Wtime();
+
 printf ("MPI task %d has started...\n", taskid);
 
 /* Set seed for random number generator equal to task ID */
@@ -72,8 +77,16 @@ for (i = 0; i < ROUNDS; i++) {
               (DARTS * (i + 1)),avepi);
    }    
 } 
-if (taskid == MASTER) 
+if (taskid == MASTER) {
    printf ("\nReal value of PI: 3.1415926535897 \n");
+}
+   
+MPI_Barrier(MPI_COMM_WORLD); /* IMPORTANT */
+end = MPI_Wtime();
+
+if (taskid == MASTER) { /* use time on master node */
+    printf("Runtime = %f\n", end-start);
+}
 
 MPI_Finalize();
 return 0;
