@@ -23,6 +23,16 @@
 - C) Given in class the answer was SPDM
 
 - D) re run with modified.... its actually the final of B) but this needs to add `MPI_COMM_Spawn`
+**#of workers** | **time in s**
+:--: | :--
+2 | 1.304495
+5 | 1.545524
+10 | 1.949735
+25 | 2.461107
+100 | 3.053408
+1000 | 29.674014
+
+
 - E)
 
 ## Question 2
