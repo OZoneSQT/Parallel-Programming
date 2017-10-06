@@ -34,17 +34,27 @@ int	taskid,	        /* task ID - also used as seed number */
 	rc,             /* return code */
 	i;
 MPI_Status status;
+
+int size;
 double start, end;
+MPI_Comm parentcomm;
 
 /* Obtain number of tasks and task ID */
 MPI_Init(&argc,&argv);
-MPI_Comm_size(MPI_COMM_WORLD,&numtasks);
+MPI_Comm_get_parent(&parentcomm);
+if(parentcomm == MPI_COMM_NULL)
+{
+   error("MPI child task %d has no parent!?", taskid);
+}
+
+MPI_Comm_remote_size(parentcomm, &size); 
+if (size != 1)
+{
+   error("Something's wrong with the parent");
+}
+
 MPI_Comm_rank(MPI_COMM_WORLD,&taskid);
-
-if(taskid == MASTER)
-   start = MPI_Wtime();
-
-printf ("MPI task %d has started...\n", taskid);
+printf ("MPI child task %d has started...\n", taskid);
 
 /* Set seed for random number generator equal to task ID */
 srandom (taskid);
@@ -67,25 +77,7 @@ for (i = 0; i < ROUNDS; i++) {
     */
 
    rc = MPI_Reduce(&homepi, &pisum, 1, MPI_DOUBLE, MPI_SUM,
-                   MASTER, MPI_COMM_WORLD);
-
-   /* Master computes average for this iteration and all iterations */
-   if (taskid == MASTER) {
-      pi = pisum/numtasks;
-      avepi = ((avepi * i) + pi)/(i + 1); 
-      printf("   After %8d throws, average value of pi = %10.8f\n",
-              (DARTS * (i + 1)),avepi);
-   }    
-} 
-if (taskid == MASTER) {
-   printf ("\nReal value of PI: 3.1415926535897 \n");
-}
-   
-MPI_Barrier(MPI_COMM_WORLD); /* IMPORTANT */
-end = MPI_Wtime();
-
-if (taskid == MASTER) { /* use time on master node */
-    printf("Runtime = %f\n", end-start);
+                   MASTER, parentcomm);  
 }
 
 MPI_Finalize();
