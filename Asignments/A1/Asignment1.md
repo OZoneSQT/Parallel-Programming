@@ -54,18 +54,21 @@ All the tests were done with the same number of darts and rounds.
 ![image](https://user-images.githubusercontent.com/16867443/31311712-0499da36-ab80-11e7-8e8a-26c701af1ad6.png)
 
 ## Question 2
-```c
-Master::MakeWorker(double darts, double rounds, CommSummer
+This is a pseudo-c++ object oriented approach to solve the Pi convergence algorithm. I'm a native C++ developer with hardcore OOP tendencies.
+```c++
+function Master::GetWorkerFromPool(double darts, double rounds, CommSummer* sum)
 {
-
+    Worker* worker = m_WorkerPool.GetFree()
+    if(worker is not nullptr) returne
+    for each (rounds)
+       for each(darts)
+          sum->SumQueue(worker->pi_calc())
 }
 
-double CalcPi()
+function CalcPi()
 {
-   if( Master.PiDiff() +/- PI_VALUE - 0.00001)
-      Program Complete
-      
-   Master.MakeWorker( Master.PiDiff() * 333.333333,   Master.PiDiff().floored() * 157.357892514,  this)
+   while(Master.PiDiff() +/- (PI_VALUE - 0.00001) is not true)   
+      Master.GetWorkerFromPool( Master.PiDiff() * 333.333333,   Master.PiDiff().floored() * 157.357892514,  this)
 }
 ```
 ## Question 3
