@@ -47,7 +47,11 @@ All the tests were done with the same number of darts and rounds.
 1000 | 29.674014
 
 - E)
+  - From A) This speed up graph has both the X and Y asymptotes, its a nice rational function f(x) = 1/x. The over head from communication explains the slowdown seen with fewer number of processes but increasing the number of workers to the maxium of 1000 the time to create all the processes on the server kills the runtime.
 ![image](https://user-images.githubusercontent.com/16867443/31311499-5aecbcf0-ab7b-11e7-9fed-8c41ca0c23e0.png)
+
+  - From D) This speed up graph has both the X and Y asymptotes, its a nice rational function f(x) = 1/x. The over head from communication exponentially grows with the number of children as the bottleneck for the execution time; this explains the slow down seen.
+![image](https://user-images.githubusercontent.com/16867443/31311712-0499da36-ab80-11e7-8e8a-26c701af1ad6.png)
 
 ## Question 2
 pseudo code for doing this dynamically
