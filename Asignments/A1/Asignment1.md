@@ -1,18 +1,24 @@
 # Asignment 1
+This covers the basic inroductory of parrellel programming and the concept be the systems which they run on.
 
 ### Table of Contents
 1. [Contributors](#Contributors)
+2. Question 1
+3. Question 2
 
 ## Contributors
-> insert my usual table....
+**Student** | **ID**
+:---: | ---
+Christopher McArthur | `40004257`
 
 ## Question 1
-- A) Code provided in `mpi-reduce.c` and ran with -n==1 
+- A) Code provided in `mpi-reduce.c` and ran with -n == 1 
   - the runtime was 0.246764 (i'm assuming seconds)
 
-- B)
-**# of workers** | **time (in s)**
-:---: | :---
+- B) `mpi-reduce.c` and ran with varrying -n
+
+**number of workers** | **time (in s)**
+:---: | ---
 2 | 0.260926
 5 | 0.275430
 10 | 0.325272
@@ -22,16 +28,16 @@
 
 - C) Given in class the answer was SPDM
 
-- D) re run with modified.... its actually the final of B) but this needs to add `MPI_COMM_Spawn`
-**#of workers** | **time in s**
-:--: | :--
+- D) `mpi-parent.c` and `mpi-child.c` with -n == 1 and the internal variable changed in the parent code for number of children.
+
+**number of workers** | **time in s**
+:---: | ---
 2 | 1.304495
 5 | 1.545524
 10 | 1.949735
 25 | 2.461107
 100 | 3.053408
 1000 | 29.674014
-
 
 - E)
 
