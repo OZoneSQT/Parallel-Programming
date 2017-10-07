@@ -5,6 +5,11 @@ This covers the basic inroductory of parrellel programming and the concept be th
 1. [Contributors](#Contributors)
 2. Question 1
 3. Question 2
+4. Question 3
+5. Question 4
+6. Question 5
+7. Code Files
+8. Attributions
 
 ## Contributors
 **Student** | **ID**
@@ -12,6 +17,8 @@ This covers the basic inroductory of parrellel programming and the concept be th
 Christopher McArthur | `40004257`
 
 ## Question 1
+All the tests were done with the same number of darts and rounds.
+
 - A) Code provided in `mpi-reduce.c` and ran with -n == 1 
   - the runtime was 0.246764 (i'm assuming seconds)
 
@@ -26,9 +33,9 @@ Christopher McArthur | `40004257`
 100 | 0.882547
 1000 | 5.211698
 
-- C) Given in class the answer was SPDM
+- C) This is a fine grain solution because there is a proccess created for each task. This is an SPDM parrelel program.
 
-- D) `mpi-parent.c` and `mpi-child.c` with -n == 1 and the internal variable changed in the parent code for number of children.
+- D) `mpi-parent.c` with -n == 1 and  `mpi-child.c` spawn with an internal variable changed in the parent code for number of children.
 
 **number of workers** | **time in s**
 :---: | ---
