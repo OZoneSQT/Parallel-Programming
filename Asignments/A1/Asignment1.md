@@ -47,6 +47,7 @@ All the tests were done with the same number of darts and rounds.
 1000 | 29.674014
 
 - E)
+![image](https://user-images.githubusercontent.com/16867443/31311499-5aecbcf0-ab7b-11e7-9fed-8c41ca0c23e0.png)
 
 ## Question 2
 pseudo code for doing this dynamically
