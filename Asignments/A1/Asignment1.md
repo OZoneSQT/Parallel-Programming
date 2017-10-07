@@ -54,8 +54,20 @@ All the tests were done with the same number of darts and rounds.
 ![image](https://user-images.githubusercontent.com/16867443/31311712-0499da36-ab80-11e7-8e8a-26c701af1ad6.png)
 
 ## Question 2
-pseudo code for doing this dynamically
+```c
+Master::MakeWorker(double darts, double rounds, CommSummer
+{
 
+}
+
+double CalcPi()
+{
+   if( Master.PiDiff() +/- PI_VALUE - 0.00001)
+      Program Complete
+      
+   Master.MakeWorker( Master.PiDiff() * 333.333333,   Master.PiDiff().floored() * 157.357892514,  this)
+}
+```
 ## Question 3
 - A)
 - B)
