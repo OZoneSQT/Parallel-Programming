@@ -74,7 +74,15 @@ function CalcPi()
 ## Question 3
 - A) with at least 10 CPUs the best best parrellel time is 9 units of time... this puts the efficiency at aprox. 0.1915.
 - B) decrease is the only option which could improve the efficiency. This is because effiency is calculated by speedup divided by the number of processors, the lower the number of CPUs the larger efficiency is likely to be.
-- C)
+- C) The runtime with 4 identical CPUs is 16t (see table below); Making the speedup = 0.3404.
+
+**CPU number** | **Cycle One** | **Cycle Two** | **Cycle Three** |**Cycle Four** | **Cycle Five** | **Cycle Six**
+--- | --- | --- | --- | --- | --- | ---
+0 |  x  | 2t | 2t | 2t | 5t | x
+1 |  x  | 2t | 2t | 2t | 5t | x
+*2 | 1t | 2t | 2t | 5t | 5t | 1t*
+3 |  x  | 2t | 2t | 5t | 5t | x
+
 - D)
 
 ## Question 4
