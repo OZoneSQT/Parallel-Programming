@@ -80,10 +80,17 @@ function CalcPi()
 --- | --- | --- | --- | --- | --- | ---
 0 |  x  | 2t | 2t | 2t | 5t | x
 1 |  x  | 2t | 2t | 2t | 5t | x
-*2 | 1t | 2t | 2t | 5t | 5t | 1t*
+2 | *1t* | *2t* | *2t* | *5t* | *5t* | *1t*
 3 |  x  | 2t | 2t | 5t | 5t | x
 
-- D)
+- D) CPUs 0 and 1 are the faster ones, CPUs 2 and 3 are the slower. The table cells with postfixed pluses followed by prefixed pluses. The speed up for this solution is 0.4893 at 23t.
+
+**CPU number** | **Cycle One** | **Cycle Two** | **Cycle Three** |**Cycle Four** | **Cycle Five** | **Cycle Six** | **Cycle Seven** | **Cycle Eight**
+--- | --- | --- | --- | --- | --- | --- | --- | ---
+0 |  *1t*  | *2t* | *2t* | *2t* | *5t* | 5t | x | *1t*
+1 |  x  | 2t | 2t | 2t | 5t | 5t | x | x
+2 |  x  | 2t + | + 2t | 2t + | + 2t | *5t* | *5t* | x
+3 |  x  | 2t + | + 2t | 2t + | + 2t | x | x | x
 
 ## Question 4
 
