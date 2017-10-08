@@ -3,13 +3,13 @@ This covers the basic inroductory of parrellel programming and the concept be th
 
 ### Table of Contents
 1. [Contributors](#Contributors)
-2. Question 1
-3. Question 2
-4. Question 3
-5. Question 4
-6. Question 5
-7. Code Files
-8. Attributions
+2. [Question 1](#Question-1)
+3. [Question 2](#Question-2)
+4. [Question 3](#Question-3)
+5. [Question 4](#Question-4)
+6. [Question 5](#Question-5)
+7. [Code Files](#Code-Files)
+8. [Attributions](#Attributions)
 
 ## Contributors
 **Student** | **ID**
@@ -93,9 +93,16 @@ function CalcPi()
 3 |  x  | 2t + | + 2t | 2t + | + 2t | x | x | x
 
 ## Question 4
+- A) Under flawless conditions, the best parrellaelized time is equal to the depth of the tree whic his log(n).
+- B) The sequestial time for his problem is O(log(n)), this puts efficiency at O(1/n)
+- C) This solution is far from cost optimal because it's a fine grain attempt to solve the problem but in the best case obtains the runtime for a sequencial system.
 
 ## Question 5
+I am not proving anything mathematically.
 
-### Attributions
+## Code Files
+Contained in submission `.zip`.
+
+## Attributions
 * Q1-A: (https://stackoverflow.com/a/5301414)
 * Q1-D: (http://www.mcs.anl.gov/research/projects/mpi/mpi-standard/mpi-report-2.0/node98.htm)
