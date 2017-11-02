@@ -32,8 +32,8 @@ printf ("MPI task %d has started...\n", taskid);
 MPI_Barrier(MPI_COMM_WORLD); /* IMPORTANT */
 if(taskid == MASTER)
    start = MPI_Wtime();
-
-   int n = sizeof(arr)/sizeof(arr[0]);
+{
+   int n = sizeof(random_array_seq)/sizeof(random_array_seq[0]); // should be 150
    printf("Unorted array: n");
    printArray(random_array_seq, n);
    
@@ -41,7 +41,8 @@ if(taskid == MASTER)
    
    printf("Sorted array: n");
    printArray(random_array_seq, n);
-
+}
+   
 MPI_Barrier(MPI_COMM_WORLD); /* IMPORTANT */
 if (taskid == MASTER) {
    end = MPI_Wtime();
