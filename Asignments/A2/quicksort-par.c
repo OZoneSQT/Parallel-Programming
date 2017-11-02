@@ -42,6 +42,7 @@ if(taskid == MASTER)
    //quickSort(random_array_seq, 0, n-1);
    // TO DO: Determine now to implement sort range
    // TO DO: Determine how to implement communication
+   // Inspiration: https://github.com/examachine/par-quicksort/blob/ab1dce68e23657902879bb3641009cffe5ea043b/quicksort.c#L184
 
 MPI_Barrier(MPI_COMM_WORLD); /* IMPORTANT */
 if (taskid == MASTER) {
