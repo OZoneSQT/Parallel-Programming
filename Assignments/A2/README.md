@@ -5,7 +5,8 @@ This assignment is to cover parellel sorting algorithms by the specific implemen
 1. [Contributors](#contributors)
 2. [Question 1](#question-1)
 3. [Question 2](#question-2)
-3. [Question 3](#question-3)
+4. [Question 3](#question-3)
+5. [Question 4](#question-4)
 
 ## Contributors
 **Student** | **ID**
