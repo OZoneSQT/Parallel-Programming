@@ -1,4 +1,4 @@
-# Asignments
+# Assignments
 
 ### Modules
 **Assignment Number** | **Status**

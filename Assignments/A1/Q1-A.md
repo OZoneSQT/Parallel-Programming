@@ -1,4 +1,4 @@
-# Output fp Question 1 Part A
+# Output of Question 1 Part A
 
 ```bash
 MPI task 0 has started...

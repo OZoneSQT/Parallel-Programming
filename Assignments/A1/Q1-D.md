@@ -1,3 +1,5 @@
+# Output from Question 1 Part D
+
 ```bash
 [apini] [/home/c/c_mcart/Documents] > mpirun -n 1 mpi-parent.run 1
 MPI task 0 has started...
