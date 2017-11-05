@@ -75,7 +75,7 @@ void hypercube_quicksort(int *A, int n)
   int id;
   int i;
   int numprocs;
-  double d;
+  int d;
   int *B;			/* accumulation buffer */
 
   B = (int*)malloc(2*n*sizeof(int));
