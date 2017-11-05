@@ -184,7 +184,7 @@ int par_partition(int* Arr, int ptr_offset, int ptr_limit, int active_dimension)
    int size = ptr_limit - ptr_offset;
    int* tmp;
    
-   MPI_Comm comm;
+   MPI_Comm comm = MPI_COMM_WORLD;
    
    MPI_Comm_size(comm,&nprocs);
    MPI_Comm_rank(comm,&taskid);
