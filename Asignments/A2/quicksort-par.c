@@ -1,6 +1,7 @@
 #include "mpi.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define MASTER 0        /* task ID of master task */
 
@@ -10,7 +11,7 @@ void quickSort(int arr[], int low, int high);
 void printArray(int arr[], int size);
 
 int randomized_select(int *A, int p, int r, int i);
-int par_partition(int *A, int p, int r, int cube);
+int par_partition(int* Arr, int ptr_offset, int ptr_limit, int active_dimension);
 void hypercube_quicksort(int *A, int n);
 
 int main (int argc, char *argv[])
@@ -61,14 +62,6 @@ if (taskid == MASTER) {
 
 MPI_Finalize();
 return 0;
-}
-
-// https://stackoverflow.com/a/8287124/8480874
-int * intdup(int const * src, size_t len)
-{
-   int * p = malloc(len * sizeof(int));
-   memcpy(p, src, len * sizeof(int));
-   return p;
 }
 
 /*
@@ -207,7 +200,7 @@ int par_partition(int* Arr, int ptr_offset, int ptr_limit, int active_dimension)
       int SUM = 0;
       MPI_Allreduce(&local_pivot, &SUM, 1, MPI_INT, MPI_SUM, comm);
       global_pivot = SUM/nprocs;
-      if (taskid == MASTER) printf("%d: pivot is %d\n", taskid, x);
+      if (taskid == MASTER) printf("%d: pivot is %d\n", taskid, global_pivot);
 
       if (taskid & (1 << active_dimension)) // determine high vs low group
          color = COLOR_HIGH;
@@ -215,7 +208,7 @@ int par_partition(int* Arr, int ptr_offset, int ptr_limit, int active_dimension)
          color = COLOR_LOW;
     
       MPI_Comm newcomm;
-      if (MPI_Comm_split(comm, color, id, &newcomm) != MPI_SUCCESS) {
+      if (MPI_Comm_split(comm, color, taskid, &newcomm) != MPI_SUCCESS) {
          printf("\n\n ---- ERROR SPLITTING COMM ----\n\n");
          exit(-1);
       }
