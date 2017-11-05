@@ -1,7 +1,6 @@
 #include "mpi.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>      // this is so memcopy doesnt produce undeclaired warnings =?
 
 #define MASTER 0        /* task ID of master task */
