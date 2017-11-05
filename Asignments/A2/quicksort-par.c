@@ -11,6 +11,7 @@ int partition (int arr[], int low, int high);
 void quickSort(int arr[], int low, int high);
 void printArray(int arr[], int size);
 
+int log2(int x);
 int randomized_select(int *A, int p, int r, int i);
 int par_partition(int* Arr, int ptr_offset, int ptr_limit, int active_dimension);
 void hypercube_quicksort(int *A, int n);
@@ -83,7 +84,7 @@ void hypercube_quicksort(int *A, int n)
   MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
   MPI_Comm_rank(MPI_COMM_WORLD,&id);
   // find number of dimensions
-  d = sqrt(numprocs);
+  d = log2(numprocs);
   printf ("%d processors\n",numprocs);
   printf ("hypercube has %d dimensions\n",d);
   for (i=d-1;i>=0;i--) {
@@ -247,6 +248,19 @@ int randomized_select(int *A, int p, int r, int i)
       return randomized_select(A,p,q,i);
    else
       return randomized_select(A,q+1,r,i-k);
+}
+
+int log2(int x)
+{
+  int l, mask;
+  if (x<=0)
+    return 0;
+  l=31;
+  for (mask=(1L << 31); l>=0; l--, (mask>>=1)) {
+    if (mask&x)
+      return l;
+  }
+  return 0;
 }
 
 /*
