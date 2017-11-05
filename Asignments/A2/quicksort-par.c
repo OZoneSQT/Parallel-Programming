@@ -85,7 +85,7 @@ void hypercube_quicksort(int *A, int n)
   MPI_Comm_rank(MPI_COMM_WORLD,&id);
   // find number of dimensions
   d = log2(numprocs);
-  if (taskid == MASTER) printf ("%d processors - hypercube has %d dimensions\n",numprocs,d);
+  if (id == MASTER) printf ("%d processors - hypercube has %d dimensions\n",numprocs,d);
 	
   for (i=d-1;i>=0;i--) {
     int q = par_partition(A,0,n-1,i);
