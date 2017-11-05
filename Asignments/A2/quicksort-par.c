@@ -10,6 +10,7 @@ int partition (int arr[], int low, int high);
 void quickSort(int arr[], int low, int high);
 void printArray(int arr[], int size);
 
+int partition(int *A, int p, int r);
 int log2(int x);
 int randomized_select(int *A, int p, int r, int i);
 int par_partition(int* Arr, int ptr_offset, int ptr_limit, int active_dimension);
@@ -84,8 +85,8 @@ void hypercube_quicksort(int *A, int n)
   MPI_Comm_rank(MPI_COMM_WORLD,&id);
   // find number of dimensions
   d = log2(numprocs);
-  printf ("%d processors\n",numprocs);
-  printf ("hypercube has %d dimensions\n",d);
+  if (taskid == MASTER) printf ("%d processors - hypercube has %d dimensions\n",numprocs,d);
+	
   for (i=d-1;i>=0;i--) {
     int q = par_partition(A,0,n-1,i);
     int link = 1<<i;
@@ -262,6 +263,33 @@ int log2(int x)
   return 0;
 }
 
+int partition(int *A, int p, int r)
+{
+  int x,i,j;
+  /* select pivot randomly */
+  x = A [ p + (int)( ((double)r-p)*rand()/(RAND_MAX + 1.0) ) ];
+
+/*   int x = A[p]; */
+  i = p - 1;
+  j = r + 1;
+  while (1) {
+    do {
+      j = j - 1;
+    } while (A[j]>x);
+    do {
+      i = i + 1;
+    } while (A[i]<x);
+    if (i<j) {
+      int tmp;
+      tmp = A[i];
+      A[i] = A[j];
+      A[j] = tmp;
+    }
+    else
+      return j;
+  }
+}
+
 /*
     THE CODE BELOW IS TAKEN FROM http://www.geeksforgeeks.org/quick-sort/
     ALL CREDIT GOES TO THEM FOR THE CODE
@@ -280,7 +308,7 @@ void swap(int* a, int* b)
     array, and places all smaller (smaller than pivot)
    to left of pivot and all greater elements to right
    of pivot */
-int partition (int arr[], int low, int high)
+/*int partition (int arr[], int low, int high)
 {
     int pivot = arr[high];    // pivot
     int i = (low - 1);        // Index of smaller element
@@ -297,7 +325,7 @@ int partition (int arr[], int low, int high)
     }
     swap(&arr[i + 1], &arr[high]);
     return (i + 1);
-}
+}*/
  
 /* The main function that implements QuickSort
  arr[] --> Array to be sorted,
