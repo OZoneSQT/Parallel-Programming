@@ -34,12 +34,12 @@ if(taskid == MASTER)
 
 {
    int n = sizeof(random_array_seq)/sizeof(random_array_seq[0]); // should be 150
-   printf("Unorted array: n");
+   printf("\nUnorted array: ");
    printArray(random_array_seq, n);
    
    quickSort(random_array_seq, 0, n-1);
    
-   printf("Sorted array: n");
+   printf("\nSorted array: ");
    printArray(random_array_seq, n);
 }
    
