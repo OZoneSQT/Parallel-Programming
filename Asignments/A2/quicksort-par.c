@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>      // this is so memcopy doesnt produce undeclaired warnings =?
 
 #define MASTER 0        /* task ID of master task */
 
@@ -106,8 +107,7 @@ void hypercube_quicksort(int *A, int n)
 	       MPI_STATUS_IGNORE);
 
       /* send A2 */
-      //LOG("%d,low: a2size=%d, b1size=%d, partner %d\n",
-	     id,a2size,b1size, id^link);
+      //LOG("%d,low: a2size=%d, b1size=%d, partner %d\n",id,a2size,b1size, id^link);
       MPI_Send(A+a1size, a2size, MPI_INT, id^link, 0, MPI_COMM_WORLD);
       //LOG("%d: sent %d: ", id, id^link);
       //print_array(A+q+1, a2size);
@@ -139,8 +139,7 @@ void hypercube_quicksort(int *A, int n)
       MPI_Recv(&b2size, 1, MPI_INT, id^link, 0, MPI_COMM_WORLD,
 	       MPI_STATUS_IGNORE);
       MPI_Send(&a1size, 1, MPI_INT, id^link, 0, MPI_COMM_WORLD);
-      //LOG("%d,high: a1size=%d, b2size=%d, partner %d\n",
-	     id,a1size,b2size, id^link);
+      //LOG("%d,high: a1size=%d, b2size=%d, partner %d\n",id,a1size,b2size, id^link);
 
       /* receive */
       newsize = a2size + b2size;
