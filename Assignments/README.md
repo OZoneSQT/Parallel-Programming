@@ -4,4 +4,5 @@
 **Assignment Number** | **Status**
 :---:|---
 1 | Complete
-2 | WIP
+2 | Complete
+3 | To Do
