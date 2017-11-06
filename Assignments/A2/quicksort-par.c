@@ -101,7 +101,7 @@ void hypercube_quicksort(int *Arr, int size)
          printf("%d: am low: size=%d || partner %d: size=%d\n", taskid, a2size, taskid^link, b1size);
 
          /* send A2 */
-         MPI_Send(A + a1size, a2size, MPI_INT, taskid^link, 0, MPI_COMM_WORLD);
+         MPI_Send(Arr + a1size, a2size, MPI_INT, taskid^link, 0, MPI_COMM_WORLD);
 
          /* receive B1 */
          newsize = a1size + b1size;
@@ -137,7 +137,7 @@ void hypercube_quicksort(int *Arr, int size)
             printf("alloc failed!!!!\n");
             exit(-1);
          }
-         memcpy(B, A + a1size, a2size * sizeof(int));
+         memcpy(B, Arr + a1size, a2size * sizeof(int));
          MPI_Recv(B + a2size, b2size, MPI_INT, taskid^link, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
          /* send */
