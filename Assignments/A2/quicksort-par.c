@@ -168,9 +168,7 @@ int par_partition(int* Arr, int ptr_offset, int ptr_limit, int active_dimension)
    // select pivot - median
    {
       printf("%d: selecting local pivot\n", taskid);
-      int tmp[sizeof(int)*(size)];
-      memcpy(tmp, Arr + ptr_offset, sizeof(int)*(size));
-      local_pivot = randomized_select(tmp, 0, size - 1, size / 2);
+      local_pivot = rand()%475;
       printf("%d: local pivot is %d\n", taskid, local_pivot);
    }
 
