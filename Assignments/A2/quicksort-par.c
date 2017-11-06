@@ -161,15 +161,18 @@ int par_partition(int* Arr, int ptr_offset, int ptr_limit, int active_dimension)
    int local_pivot, global_pivot, nprocs, taskid;
    int color;
    int size = ptr_limit - ptr_offset;
-   int* tmp;
 
    MPI_Comm_size(comm, &nprocs);
    MPI_Comm_rank(comm, &taskid);
 
    // select pivot - median
-   tmp = (int*)malloc(sizeof(int)*(size));
-   memcpy(tmp, Arr + ptr_offset, sizeof(int)*(size));
-   local_pivot = randomized_select(tmp, 0, size - 1, size / 2);
+   {
+      int* tmp;
+      tmp = (int*)malloc(sizeof(int)*(size));
+      memcpy(tmp, Arr + ptr_offset, sizeof(int)*(size));
+      local_pivot = randomized_select(tmp, 0, size - 1, size / 2);
+      free(tmp);
+   }
 
    // take average of pivots
    {
@@ -190,7 +193,6 @@ int par_partition(int* Arr, int ptr_offset, int ptr_limit, int active_dimension)
       }
 
       comm = newcomm;
-      MPI_Comm_size(comm, &nprocs);
    }
 
    int i = ptr_offset - 1;
