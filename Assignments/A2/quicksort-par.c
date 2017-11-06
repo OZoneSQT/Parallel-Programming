@@ -70,7 +70,6 @@ void hypercube_quicksort(int *Arr, int size)
    int taskid;
    int numprocs;
    int dimension;
-   int *B;                                      /* accumulation buffer */
 
    MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
    MPI_Comm_rank(MPI_COMM_WORLD, &taskid);
@@ -89,7 +88,36 @@ void hypercube_quicksort(int *Arr, int size)
       printf("%d partition done, step %d\n", taskid, active_dimension);
 
       int link = 1 << active_dimension;
-      if (!(taskid & link)) 	// ith bit 0
+      if (taskid & link)                      // ith bit == 1
+      {
+         // this subcube has the large numbers --> send A1 (smaller)
+         int b2size;
+
+         /* exchange sizes */
+         printf("ith bit 1: sending from %d to %d\n", taskid, taskid^link);
+         MPI_Recv(&b2size, 1, MPI_INT, taskid^link, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+         MPI_Send(&a1size, 1, MPI_INT, taskid^link, 0, MPI_COMM_WORLD);
+         printf("%d: am high: size=%d || partner %d: size=%d\n", taskid, a1size, taskid^link, b2size);
+
+         /* receive B2 */
+         newsize = a2size + b2size;
+         int* B = (int*)malloc(newsize * sizeof(int));
+         if (B == NULL)
+         {
+            printf("alloc failed!!!!\n");
+            exit(-1);
+         }
+         memcpy(B, Arr + a1size, a2size * sizeof(int));
+         MPI_Recv(B + a2size, b2size, MPI_INT, taskid^link, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+         /* send */
+         MPI_Send(Arr, a1size, MPI_INT, taskid^link, 0, MPI_COMM_WORLD);
+
+         free(Arr);
+         Arr = B;
+         size = newsize;
+      }
+      else
       {
          // this sub-cube has the small numbers --> send A2 (larger)
          int b1size;
@@ -105,7 +133,7 @@ void hypercube_quicksort(int *Arr, int size)
 
          /* receive B1 */
          newsize = a1size + b1size;
-         B = (int*)malloc(newsize * sizeof(int));
+         int B* = new int[newsize];
          if (B == NULL)
          {
             printf("alloc failed!!!!\n");
@@ -113,35 +141,6 @@ void hypercube_quicksort(int *Arr, int size)
          }
          memcpy(B, Arr, (part_at_index + 1) * sizeof(int));
          MPI_Recv(B + (part_at_index + 1), b1size, MPI_INT, taskid^link, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-         free(Arr);
-         Arr = B;
-         size = newsize;
-      }
-      else
-      {
-         // this subcube has the large numbers --> send A1 (smaller)
-         int b2size;
-
-         /* exchange sizes */
-         printf("ith bit 1: sending from %d to %d\n", taskid, taskid^link);
-         MPI_Recv(&b2size, 1, MPI_INT, taskid^link, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-         MPI_Send(&a1size, 1, MPI_INT, taskid^link, 0, MPI_COMM_WORLD);
-         printf("%d: am high: size=%d || partner %d: size=%d\n", taskid, a1size, taskid^link, b2size);
-
-         /* receive B2 */
-         newsize = a2size + b2size;
-         B = (int*)malloc(newsize * sizeof(int));
-         if (B == NULL)
-         {
-            printf("alloc failed!!!!\n");
-            exit(-1);
-         }
-         memcpy(B, Arr + a1size, a2size * sizeof(int));
-         MPI_Recv(B + a2size, b2size, MPI_INT, taskid^link, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-
-         /* send */
-         MPI_Send(Arr, a1size, MPI_INT, taskid^link, 0, MPI_COMM_WORLD);
 
          free(Arr);
          Arr = B;
