@@ -133,14 +133,14 @@ void hypercube_quicksort(int *Arr, int size)
 
          /* receive B1 */
          newsize = a1size + b1size;
-         int B* = new int[newsize];
+         int* B = (int*)malloc(newsize * sizeof(int));
          if (B == NULL)
          {
             printf("alloc failed!!!!\n");
             exit(-1);
          }
-         memcpy(B, Arr, (part_at_index + 1) * sizeof(int));
-         MPI_Recv(B + (part_at_index + 1), b1size, MPI_INT, taskid^link, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+         memcpy(B, Arr, part_at_index * sizeof(int));
+         MPI_Recv(B + part_at_index, b1size, MPI_INT, taskid^link, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
          free(Arr);
          Arr = B;
