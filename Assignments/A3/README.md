@@ -39,8 +39,12 @@ Floyd's Pairs shortest path.
 32 | 4 | 0.00758886
 32 | 16 | 0.00136709
 32 | 32 | 0.043062
+64 | 2 | 0.010658
+64 | 4 | 0.000442982
+64 | 16 | 0.00523305
+64 | 32 | 0.00272584
 
-Parallel version never finish =/
+Parallel Pipelined version was never finish =/
 
 ## Question 2
 #### Disadvantages
