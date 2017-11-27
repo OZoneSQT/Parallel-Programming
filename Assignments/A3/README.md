@@ -37,3 +37,6 @@ Parallel version never finish =/
 
 ## Question 3
 ## Question 4
+
+## Attributions
+* https://github.com/hownowstephen/concordia-comp428-3
