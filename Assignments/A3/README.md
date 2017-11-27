@@ -66,6 +66,9 @@ The 2D implementation is far better than the pipeline because it is easier to im
 *	In the case of a well balanced tree, processors will be well used and busy
 
 ## Question 3
+Assume that there is a case that the initiator processor can receive a white token without all processes being terminated.
+This implies that the last processor in the ring will pass a white token. Tokens are passed in two ways, either the token is passed as-is, or it converts to black if the process is black. Since we know that the token originates as white from the initiator processor, then if at any point the token encounters a non-idle processor, it will be turned black, and cannot be turned white again. So either the token will encounter only white processors, meaning the program is complete, or the token will arrive black. This implies therefor that it is impossible to receive a white token unless the processes have all successfully terminated, proving this algorithm by contradiction.
+
 ## Question 4
 
 ## Attributions
