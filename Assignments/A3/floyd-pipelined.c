@@ -146,7 +146,7 @@ int main(int argc, char *argv[]) {
 	int i, n, nlocal;
 	int numprocs, dims[2], periods[2], keep_dims[2];
 	int myrank, my2drank, mycoords[2];
-	MPI_File f; char* filename = "input/8";
+	MPI_File f; char* filename = "/home/c/c_mcart/Parrellel-Programming/Assignments/A3/input/8";
 	MPI_Comm comm_2d, comm_row, comm_col;
 	MPI_Status status;
 
