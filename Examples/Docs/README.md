@@ -1,5 +1,5 @@
 # Examples
-These were built to improve my understanding of the various algorithms. They are C++ implementations to simulate the parallel system.
+These were built to improve my understanding of the various algorithms. They are C++ implementations to simulate the parallel programs as well as noted explaining the concepts within parallel programming.
 
 ### Table of Contents
 1. [Contributors](#Contributors)
@@ -32,3 +32,4 @@ This is tentative list of whats to hopefully come. The text book uses the AG sli
 - Transformations
 
 ## Attributions
+- [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law#Parallel_programs)
