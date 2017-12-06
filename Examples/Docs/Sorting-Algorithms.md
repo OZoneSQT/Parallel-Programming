@@ -27,3 +27,19 @@ This algorithm has two distinct phases, it begins by comparing the outter elemen
 ![image](https://user-images.githubusercontent.com/16867443/33681454-95a51608-da92-11e7-8ed6-1aa695f1de34.png)
 
 Each CPU does log p compare-split operations, each communication can be performed in time &#x3f4;(n/p), and l odd and even phases are performed making the T<sub>p</sub> = &#x3f4;((n/p)log (n/p)) + &#x3f4;((n/p)log p) + &#x3f4;(l(n/p)).
+
+#### Quicksort
+Quicksort selects one of the entries in the sequence to be the pivot and divides the sequence into two – one with all elements less than the pivot and other greater. The process is recursively applied to each of the sublists. The performance of quicksort depends critically on the quality of the pivot. In the best case, even splits of the lists, the complexity of quicksort is O(n log n).
+
+###### Shared Address Space
+a list of size n equally divided across p processors, A pivot is selected by one of the processors and made known to all processors. Each processor partitions its list into two, say L<sub>*i*</sub> and U<sub>*i*</sub>, based on the selected pivot. All of the L<sub>*i*</sub> lists are merged and all of the U<sub>*i*</sub> lists are merged separately. CPUs are distrubuted to each list maintaining n/p ration and the processes is applied recursively.
+
+The challenge is the global merge of the lists, a technique called prefix sum is used to do this efficiently. Each CPU writes into an array at it's idex the number of elements in has in L<sub>*i*</sub> and U<sub>*i*</sub> in a seperate array. following this it calculates the sum of all the indexes before its own, this gives the prefix sum which corresponds to the index it should being writing to in the global array.
+
+![image](https://user-images.githubusercontent.com/16867443/33687633-ba1f020a-daa6-11e7-8b85-cf4188a2b6e6.png)
+
+First to determine and broadcast the pivot takes &#x3f4;(log p); locally rearrange the array takes &#x3f4;(n/p); determine the locations in the globally rearranged array takes &#x3f4;(log p); and lastly perform the global rearrangement takes &#x3f4;(n/p). Overall this process takes &#x3f4;(log p) + &#x3f4;(n/p). T<sub>p</sub> = &#x3f4;((n/p)log (n/p)) + &#x3f4;((n/p)log p) + &#x3f4;(log<sup>2</sup> p). Ths corresponding isometric function is &#x3f4;(p log<sup>2</sup> p).
+
+###### Message Passing
+based on the recursive halving of the machine, each processor in the lower half is paired with a corresponding processor in the upper
+half. A designated processor selects and broadcasts the pivot; each processor partitions its list into two, say L<sub>*i*</sub> and U<sub>*i*</sub>, based on the selected pivot. The upper CPU's L<sub>*i*</sub> is sent to the lower who sends its U<sub>*i*</sub> back. The above process is recursed until each processor has its own local list, which is sorted locally. To determine and broadcast the pivot takes &#x3f4;(log p); locally rearrange the array takes &#x3f4;(n/p); for exchanging lists and reorganization takes &#x3f4;(n/p). Tis means T<sub>p</sub> = &#x3f4;((n/p)log (n/p)) + &#x3f4;((n/p)log p) + &#x3f4;(log<sup>2</sup> p). Ths corresponding isometric function is &#x3f4;(p log<sup>2</sup> p) which is the same as the shared address space implementation.
