@@ -33,3 +33,4 @@ This is tentative list of whats to hopefully come. The text book uses the AG sli
 
 ## Attributions
 - [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law#Parallel_programs)
+- [Floyd's All-pairs](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm#Example) 
