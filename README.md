@@ -1,5 +1,5 @@
-# Parrellel-Programming
-This a C/MPI repository to contain my work for Parrellel Programming, COMP428, at Concordia University during the Fall 2017 semester.
+# Parallel-Programming
+This a C/MPI repository to contain my work for Parallel Programming, COMP428, at Concordia University during the Fall 2017 semester.
 
 ## Modules
 - [Assignments](https://github.com/prince-chrismc/Parrellel-Programming/tree/master/Assignments) { [A1](https://github.com/prince-chrismc/Parrellel-Programming/tree/master/Assignments/A1), [A2](https://github.com/prince-chrismc/Parrellel-Programming/tree/master/Assignments/A2), [A3](https://github.com/prince-chrismc/Parrellel-Programming/tree/master/Assignments/A3) }
